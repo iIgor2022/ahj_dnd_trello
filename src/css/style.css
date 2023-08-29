@@ -1,0 +1,101 @@
+.form-control {
+  background-color: #fff;
+  background-image: none;
+  font-size: 14px;
+  padding: 6px 12px;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.card-validate-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.card-validate-btn:hover {
+  background-color:#449d44;
+  border-color:#398439;
+}
+
+.card {
+  float: left;
+  width: 39px;
+  height: 30px;
+  background-position: 0 0;
+  text-indent: -9999px;
+  margin-right: 4px;
+  opacity: 0.3;
+}
+
+li {
+  display: block;
+  float: left;
+  padding-left: 0;
+}
+
+ul {
+  margin: 10px 0;
+  height: 30px;
+  padding-left: 0;
+}
+
+.card.visa {
+  background-image: url('../img/visa.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card.master {
+  background-image: url('../img/card.png');
+  background-repeat: no-repeat;
+  background-size: cover;  
+}
+
+.card.ames {
+  background-image: url('../img/american-express.png');
+  background-repeat: no-repeat;
+  background-size: cover;  
+}
+
+.card.discover {
+  background-image: url('../img/discover.png');
+  background-repeat: no-repeat;
+  background-size: cover;  
+}
+
+.card.jcb {
+  background-image: url('../img/jcb.png');
+  background-repeat: no-repeat;
+  background-size: cover;  
+}
+
+.card.diners_club {
+  background-image: url('../img/diners-club.png');
+  background-repeat: no-repeat;
+  background-size: cover;  
+}
+
+.card.mir {
+  background-image: url('../img/icons8-мир-96.png');
+  background-repeat: no-repeat;
+  background-size: cover;  
+}
+
+.card.isvalid {
+  opacity: 1;
+}
