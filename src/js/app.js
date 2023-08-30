@@ -1,4 +1,10 @@
-import DOMManipulation from './dommanipulation';
+import Controller from "./controller";
 
-const dom = new DOMManipulation(document.querySelector('body'));
-dom.bindToDOM();
+const controller = new Controller(document.querySelector(".column"));
+controller.init();
+
+document.body.addEventListener("mousedown", controller.onMouseDown);
+document.body.addEventListener("mouseup", controller.onMouseUp);
+document.body.addEventListener("mousemove", controller.onMouseMove);
+
+localStorage.clear();
