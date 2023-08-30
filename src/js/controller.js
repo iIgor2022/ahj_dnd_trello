@@ -47,6 +47,7 @@ export default class Controller {
     localStorage.setItem("cards", arr);
   }
 
+  /* eslint no-return-assign: "error" */
   getSave() {
     const storage = localStorage.getItem("cards");
 
@@ -85,14 +86,14 @@ export default class Controller {
       `;
       this.proectionAct(event);
     }
-  }
+  };
 
   onMouseUp = () => {
     if (this.draggingElement) {
       this.replaceDragging();
       this.clear();
     }
-  }
+  };
 
   proectionAct(event) {
     const { target } = event;
@@ -131,5 +132,5 @@ export default class Controller {
       this.proectionAct(event);
     }
     this.save();
-  }
+  };
 }
