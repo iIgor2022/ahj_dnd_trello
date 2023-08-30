@@ -1,5 +1,6 @@
 export default class Card {
   #element;
+
   #styles;
 
   constructor(element) {

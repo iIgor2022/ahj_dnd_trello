@@ -1,4 +1,3 @@
-import { Cache } from 'webpack';
 import createBadge from './badges';
 import Card from './card';
 
