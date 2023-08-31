@@ -7,34 +7,34 @@ export default class Controller {
     this.draggingElement = null;
     this.draggingProection = null;
 
-    document.querySelector("body").appendChild(createBadge);
+    document.querySelector('body').appendChild(createBadge());
   }
 
   init() {
     this.getSave();
-    document.addEventListener("click", this.click.bind(this));
+    document.addEventListener('click', this.click.bind(this));
   }
 
   click(element) {
     const { target } = element;
 
-    if (target.classList.contains("add-card")) {
-      target.classList.add("invisible");
-      target.closest(".column").querySelector(".add").classList.remove("invisible");
-    } else if (target.classList.contains("close")) {
-      target.closest(".add").classList.add("invisible");
-      target.closest(".column").querySelector(".add-card").classList.remove("invisible");
-    } else if (target.classList.contains("add-button")) {
-      const input = target.closest(".add").querySelector(".add-input");
+    if (target.classList.contains('add-card')) {
+      target.classList.add('invisible');
+      target.closest('.column').querySelector('.add').classList.remove('invisible');
+    } else if (target.classList.contains('close')) {
+      target.closest('.add').classList.add('invisible');
+      target.closest('.column').querySelector('.add-card').classList.remove('invisible');
+    } else if (target.classList.contains('add-button')) {
+      const input = target.closest('.add').querySelector('.add-input');
       if (input.value) {
-        input.closest(".column").querySelector(".cards").append((Card.create(input.value).element));
-        target.closest(".column").querySelector(".add").classList.add("invisible");
-        target.closest(".column").querySelector(".add-card").classList.remove("invisible");
+        input.closest('.column').querySelector('.cards').append((Card.create(input.value).element));
+        target.closest('.column').querySelector('.add').classList.add('invisible');
+        target.closest('.column').querySelector('.add-card').classList.remove('invisible');
         this.save();
-        input.value = "";
+        input.value = '';
       }
-    } else if (target.classList.contains("card-delete")) {
-      const card = element.target.closest(".card");
+    } else if (target.classList.contains('card-delete')) {
+      const card = element.target.closest('.card');
       card.remove();
       this.save();
     }
@@ -43,29 +43,31 @@ export default class Controller {
   /* eslint class-methods-use-this: ["error", { "exceptMethods": ["save", "getSave"] }] */
   save() {
     const arr = [];
-    [...document.querySelectorAll(".cards")].forEach((el) => arr.push(el.innerHTML));
-    localStorage.setItem("cards", arr);
+    [...document.querySelectorAll('.cards')].forEach((el) => arr.push(el.innerHTML));
+    localStorage.setItem('cards', arr);
   }
 
-  /* eslint no-return-assign: "error" */
   getSave() {
-    const storage = localStorage.getItem("cards");
+    const storage = localStorage.getItem('cards');
 
     if (storage) {
-      const fromStorageArray = storage.split(",");
-      [...document.querySelectorAll(".cards")].forEach((element, index) => element.innerHTML = fromStorageArray[index]);
+      const fromStorageArray = storage.split(',');
+      [...document.querySelectorAll('.cards')].forEach((element, index) => {
+        // eslint-disable-next-line no-param-reassign
+        element.innerHTML = fromStorageArray[index];
+      });
     }
   }
 
   setDraggingElement(node) {
     this.draggingElement = new Card(node);
-    this.draggingElement.element.classList.add("dragging");
+    this.draggingElement.element.classList.add('dragging');
   }
 
   replaceDragging() {
     this.draggingProection.replaceWith(this.draggingElement.element);
     this.draggingElement.element.style = this.draggingElement.styles;
-    this.draggingElement.element.classList.remove("dragging");
+    this.draggingElement.element.classList.remove('dragging');
   }
 
   clear() {
@@ -76,14 +78,11 @@ export default class Controller {
   onMouseDown = (event) => {
     const { target } = event;
 
-    if (target.classList.contains("card")) {
+    if (target.classList.contains('card')) {
       this.shiftX = event.offsetX;
       this.shiftY = event.offsetY;
       this.setDraggingElement(target);
-      this.draggingElement.style = `
-        left: ${event.pageX - this.shiftX}px;
-        top: ${event.pageY - this.shiftY}px;
-      `;
+      this.draggingElement.styles = `left: ${event.pageX - this.shiftX}px; top: ${event.pageY - this.shiftY}px;`;
       this.proectionAct(event);
     }
   };
@@ -99,16 +98,23 @@ export default class Controller {
     const { target } = event;
     const element = this.draggingElement;
     const proection = this.draggingProection;
+    const { y, height } = target.getBoundingClientRect();
 
-    if (target.classList.contains("card") && !target.classList.contains("proection")) {
-      const { y, height } = target.getBoundingClientRect();
+    if (target.classList.contains('card') && !target.classList.contains('proection')) {
       const appendPosition = y + height / 2 > event.clientY
-        ? "beforebegin"
-        : "afterend";
-      
+        ? 'beforebegin'
+        : 'afterend';
+
       if (proection) {
         proection.remove();
-        target.insertAdjacementElement(appendPosition, proection);
+        target.insertAdjacentElement(appendPosition, proection);
+      } else {
+        this.draggingProection = element.proection;
+      }
+    } else if (target.classList.contains('column') && target.querySelector('.cards').childElementCount === 0) {
+      if (proection) {
+        proection.remove();
+        target.querySelector('.cards').appendChild(proection);
       } else {
         this.draggingProection = element.proection;
       }

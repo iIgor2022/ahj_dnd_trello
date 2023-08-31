@@ -18,25 +18,25 @@ export default class Card {
 
   get proection() {
     return (() => {
-      const renderedCard = document.createElement("div");
-      renderedCard.classList.add("proection");
+      const renderedCard = document.createElement('div');
+      renderedCard.classList.add('proection');
       const { width, height } = this.styles;
-      renderedCard.style = `width: ${width}; height: ${height}, margin: 10px 0`;
+      renderedCard.style = `width: ${width}; height: ${height};margin: 10px 0`;
       return renderedCard;
-    })
+    })();
   }
 
   static create(content) {
-    const node = document.createElement("div");
-    node.classList.add("card");
+    const node = document.createElement('div');
+    node.classList.add('card');
 
-    const cardText = document.createElement("div");
-    cardText.classList.add("card__text");
+    const cardText = document.createElement('div');
+    cardText.classList.add('card__text');
     cardText.textContent = content;
     node.appendChild(cardText);
 
-    const cardDelete = document.createElement("div");
-    cardDelete.classList.add("card-delete");
+    const cardDelete = document.createElement('div');
+    cardDelete.classList.add('card-delete');
     cardDelete.innerHTML = '&#10005;';
     node.appendChild(cardDelete);
 
